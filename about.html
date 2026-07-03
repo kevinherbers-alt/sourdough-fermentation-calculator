@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Sourdough Fermentation Calculator</title>
+<meta name="description" content="About the Sourdough Fermentation Calculator — a free tool to help home bakers estimate bulk fermentation and final proof times.">
+<style>
+  :root {
+    --bg: #faf6f0;
+    --card: #ffffff;
+    --text: #3a2e22;
+    --muted: #7a6a58;
+    --accent: #b5651d;
+    --accent-dark: #8c4d14;
+    --border: #e6dcc8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  nav .nav-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  nav .nav-brand {
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  nav .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-left: 20px;
+  }
+  nav .nav-links a:hover { color: var(--accent); }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 20px; }
+  p { margin-bottom: 16px; font-size: 0.97rem; }
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Sourdough Fermentation Calculator</a>
+    <div class="nav-links">
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>About This Tool</h1>
+
+  <p>The Sourdough Fermentation Calculator is a free tool built for home bakers who want a reliable starting point for estimating bulk fermentation and final proof times. Rather than guessing or relying on a single recipe's timing, this calculator takes your actual conditions — dough temperature, room temperature, hydration level, and starter percentage — and gives you a personalized time range based on how fermentation actually behaves.</p>
+
+  <p>Sourdough fermentation is influenced by a number of variables that interact in ways that aren't always obvious. Temperature is the dominant factor: yeast and bacterial activity roughly doubles for every 15-17°F increase in temperature. But dough doesn't stay at its mixing temperature forever — over the course of a long bulk ferment, it gradually drifts toward the temperature of the room it's sitting in. This calculator accounts for that drift, which makes the estimate more accurate for longer ferments or kitchens where the gap between dough and room temperature is significant.</p>
+
+  <p>Starter percentage and hydration are factored in as secondary variables. More starter accelerates fermentation because there are simply more active microorganisms present from the start. Higher hydration speeds things up slightly, since enzymes and microbes move more easily through a wetter dough.</p>
+
+  <p>The output is intentionally a range rather than a single number. Fermentation is a biological process and no calculator can perfectly predict it for every flour, every starter culture, and every kitchen. Use the time range as a guide, and let the dough's actual behavior — volume increase, surface bubbles, texture — be your final signal for when bulk fermentation is done.</p>
+
+  <footer>
+    <p><a href="/">Calculator</a> <a href="/about.html">About</a> <a href="/contact.html">Contact</a></p>
+  </footer>
+</div>
+
+</body>
+</html>
