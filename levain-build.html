@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7138011475350254"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Levain Build Calculator - Sourdough Fermentation Calculator</title>
+<meta name="description" content="Calculate when to build your levain and in what ratio so it peaks exactly when you want to mix your dough. Work backwards from your bake schedule.">
+<style>
+  :root {
+    --bg: #faf6f0; --card: #ffffff; --text: #3a2e22; --muted: #7a6a58;
+    --accent: #b5651d; --accent-dark: #8c4d14; --border: #e6dcc8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+  nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 20px; }
+  nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; flex-wrap: wrap; }
+  nav .nav-brand { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+  nav .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; margin-left: 14px; }
+  nav .nav-links a:hover { color: var(--accent); }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 60px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); margin-top: 0; margin-bottom: 28px; font-size: 0.95rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  label { display: block; font-weight: 600; margin-top: 18px; margin-bottom: 6px; font-size: 0.92rem; }
+  label:first-of-type { margin-top: 0; }
+  .hint { color: var(--muted); font-size: 0.8rem; font-weight: 400; }
+  input[type="number"], input[type="time"], select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; background: #fff; color: var(--text); }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button { margin-top: 24px; width: 100%; padding: 13px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 600; cursor: pointer; }
+  button:hover { background: var(--accent-dark); }
+  #result { margin-top: 24px; padding: 18px; background: #fbf1e4; border: 1px solid var(--border); border-radius: 10px; display: none; }
+  #result.show { display: block; }
+  #result .time { font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); }
+  #result .recipe { font-size: 1.05rem; font-weight: 600; color: var(--accent-dark); margin-top: 10px; }
+  #result .note { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
+  .article { margin-top: 40px; font-size: 0.95rem; }
+  .article h2 { font-size: 1.15rem; margin-top: 28px; }
+  .article a { color: var(--accent); }
+  footer { text-align: center; margin-top: 50px; color: var(--muted); font-size: 0.8rem; }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 6px; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Sourdough Fermentation Calculator</a>
+    <div class="nav-links">
+      <a href="/cold-retard.html">Cold Retard</a>
+      <a href="/levain-build.html">Levain Build</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>Levain Build Calculator</h1>
+  <p class="subtitle">Work backwards from when you want to mix your dough: find out when to build your levain, at what ratio, and how much of each ingredient to use.</p>
+
+  <div class="card">
+    <label for="amount">Levain needed for your recipe (grams)
+      <span class="hint">— what your bread recipe calls for</span>
+    </label>
+    <input type="number" id="amount" value="100" min="20" max="1000" step="10">
+
+    <label for="mixTime">When do you want to mix your dough?</label>
+    <input type="time" id="mixTime" value="09:00">
+
+    <label for="temp">Room temperature where the levain will sit (°F)</label>
+    <input type="number" id="temp" value="72" min="55" max="90" step="1">
+
+    <label for="ratio">Build ratio (starter : flour : water)</label>
+    <select id="ratio">
+      <option value="1">1:1:1 — fast, ready in ~4-6 hours</option>
+      <option value="5" selected>1:5:5 — standard overnight build, ~8-12 hours</option>
+      <option value="10">1:10:10 — slow build, ~12-16 hours</option>
+    </select>
+
+    <button onclick="calculate()">When should I build it?</button>
+
+    <div id="result">
+      <div class="time" id="timeOutput"></div>
+      <div class="recipe" id="recipeOutput"></div>
+      <div class="note" id="noteOutput"></div>
+    </div>
+  </div>
+
+  <div class="article">
+    <h2>What a levain build ratio means</h2>
+    <p>A levain is an offshoot of your starter, built specifically for one bake. The ratio describes how much mature starter seeds the build relative to fresh flour and water: a 1:5:5 build uses 1 part starter to 5 parts each of flour and water. Higher ratios (more fresh food per unit of starter) take longer to peak, because the small starter population has more territory to colonize — which is exactly why they're useful for overnight schedules.</p>
+    <h2>Timing and temperature</h2>
+    <p>Temperature moves levain timing the same way it moves dough fermentation — roughly twice as fast for every 15-17°F warmer. This calculator adjusts the expected peak window for your room temperature. A levain is ready when it has domed and roughly doubled or tripled, is full of bubbles, and smells pleasantly tangy; if it has collapsed and smells sharply acidic, it's past peak — still usable, but your dough may ferment faster and taste more sour.</p>
+    <p>Once your levain is mixed into the dough, plan the rest of your schedule with the <a href="/">fermentation calculator</a>, or set up an overnight schedule with the <a href="/cold-retard.html">cold retard calculator</a>.</p>
+  </div>
+
+  <footer>
+    <p>Estimates are based on common fermentation behavior and may vary depending on your specific starter and flour.</p>
+    <p><a href="/">Calculator</a> <a href="/cold-retard.html">Cold Retard</a> <a href="/levain-build.html">Levain Build</a> <a href="/about.html">About</a> <a href="/contact.html">Contact</a></p>
+    <p><a href="https://swrltools.com">Part of Swrl Tools</a></p>
+  </footer>
+</div>
+
+<script>
+function calculate() {
+  const amount = parseFloat(document.getElementById('amount').value);
+  const mixTime = document.getElementById('mixTime').value;
+  const temp = parseFloat(document.getElementById('temp').value);
+  const ratio = parseFloat(document.getElementById('ratio').value);
+
+  if (isNaN(amount) || !mixTime || isNaN(temp)) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  // Base peak times at 75F for each ratio
+  const baseHours = { 1: 5, 5: 10, 10: 14 }[ratio];
+  // Temperature adjustment
+  const tempFactor = Math.pow(0.5, (temp - 75) / 16);
+  const peakHours = baseHours * tempFactor;
+  const low = peakHours * 0.85;
+  const high = peakHours * 1.15;
+
+  // Build time = mix time minus peak hours
+  const [h, m] = mixTime.split(':').map(Number);
+  const mix = new Date();
+  mix.setHours(h, m, 0, 0);
+  const buildTime = new Date(mix.getTime() - peakHours * 3600 * 1000);
+  const dayNote = buildTime.getDate() !== mix.getDate() ? ' the evening before' : '';
+
+  const buildStr = buildTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+  // Ingredient amounts: total = amount * 1.15 buffer, parts = 1 + ratio + ratio
+  const total = amount * 1.15;
+  const parts = 1 + ratio * 2;
+  const starter = Math.ceil(total / parts / 5) * 5;
+  const flour = starter * ratio;
+  const water = starter * ratio;
+
+  document.getElementById('timeOutput').textContent =
+    'Build your levain around ' + buildStr + dayNote;
+  document.getElementById('recipeOutput').textContent =
+    'Mix: ' + starter + 'g starter + ' + flour + 'g flour + ' + water + 'g water';
+  document.getElementById('noteOutput').textContent =
+    'At ' + temp + '°F, a 1:' + ratio + ':' + ratio + ' build typically peaks in ' + low.toFixed(0) + '-' + high.toFixed(0) +
+    ' hours. This makes about ' + (starter + flour + water) + 'g — a little extra so you\'re not scraping the jar. ' +
+    'Look for it to be domed, bubbly, and roughly doubled before using.';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

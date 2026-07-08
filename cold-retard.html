@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7138011475350254"
+     crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold Retard Calculator - Fridge Fermentation Timing - Sourdough Fermentation Calculator</title>
+<meta name="description" content="Calculate how refrigerating your sourdough changes fermentation timing. Plan overnight cold retards for bulk fermentation or final proof.">
+<style>
+  :root {
+    --bg: #faf6f0; --card: #ffffff; --text: #3a2e22; --muted: #7a6a58;
+    --accent: #b5651d; --accent-dark: #8c4d14; --border: #e6dcc8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+  nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 20px; }
+  nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; flex-wrap: wrap; }
+  nav .nav-brand { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+  nav .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; margin-left: 14px; }
+  nav .nav-links a:hover { color: var(--accent); }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 60px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); margin-top: 0; margin-bottom: 28px; font-size: 0.95rem; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  label { display: block; font-weight: 600; margin-top: 18px; margin-bottom: 6px; font-size: 0.92rem; }
+  label:first-of-type { margin-top: 0; }
+  .hint { color: var(--muted); font-size: 0.8rem; font-weight: 400; }
+  input[type="number"], select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; background: #fff; color: var(--text); }
+  input[type="number"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button { margin-top: 24px; width: 100%; padding: 13px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 600; cursor: pointer; }
+  button:hover { background: var(--accent-dark); }
+  #result { margin-top: 24px; padding: 18px; background: #fbf1e4; border: 1px solid var(--border); border-radius: 10px; display: none; }
+  #result.show { display: block; }
+  #result .time { font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); }
+  #result .note { color: var(--muted); font-size: 0.85rem; margin-top: 8px; }
+  .article { margin-top: 40px; font-size: 0.95rem; }
+  .article h2 { font-size: 1.15rem; margin-top: 28px; }
+  .article a { color: var(--accent); }
+  footer { text-align: center; margin-top: 50px; color: var(--muted); font-size: 0.8rem; }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 6px; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Sourdough Fermentation Calculator</a>
+    <div class="nav-links">
+      <a href="/cold-retard.html">Cold Retard</a>
+      <a href="/levain-build.html">Levain Build</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>Cold Retard Calculator</h1>
+  <p class="subtitle">Planning to slow your fermentation in the fridge? See how much fermentation still happens during a cold retard, and how to split your timing between room temperature and refrigeration.</p>
+
+  <div class="card">
+    <label for="roomHours">Fermentation time your recipe expects at room temperature (hours)
+      <span class="hint">— e.g. your bulk fermentation or proof time at ~75°F. Not sure? Use our <a href="/">fermentation calculator</a> first.</span>
+    </label>
+    <input type="number" id="roomHours" value="4.5" min="1" max="24" step="0.5">
+
+    <label for="fridgeTemp">Your fridge temperature (°F)
+      <span class="hint">— most home fridges run 36-40°F</span>
+    </label>
+    <input type="number" id="fridgeTemp" value="38" min="33" max="50" step="1">
+
+    <label for="fridgeHours">How long the dough will be in the fridge (hours)</label>
+    <input type="number" id="fridgeHours" value="12" min="1" max="72" step="1">
+
+    <label for="stage">What are you retarding?</label>
+    <select id="stage">
+      <option value="proof">Final proof (shaped loaf overnight, bake from fridge)</option>
+      <option value="bulk">Bulk fermentation (dough mass in fridge)</option>
+    </select>
+
+    <button onclick="calculate()">Calculate my room-temp time</button>
+
+    <div id="result">
+      <div class="time" id="timeOutput"></div>
+      <div class="note" id="noteOutput"></div>
+    </div>
+  </div>
+
+  <div class="article">
+    <h2>How cold retarding works</h2>
+    <p>Refrigeration doesn't stop fermentation — it slows it dramatically. At typical fridge temperatures, yeast and bacterial activity drops to a small fraction of its room-temperature rate, but over a 12-24 hour retard that slow activity still adds up to meaningful fermentation progress. This calculator estimates how much of your recipe's fermentation "budget" the fridge time consumes, and therefore how much room-temperature fermentation you should complete before the dough goes in.</p>
+    <p>There's also a transition period: a bowl or banneton of dough takes a couple of hours to actually chill through to fridge temperature, and it ferments at a decent rate during that cooldown. The calculator accounts for this, which is why short retards consume proportionally more of your fermentation budget than you might expect.</p>
+    <h2>Why bakers retard dough</h2>
+    <p>Scheduling is the practical reason — shape in the evening, bake fresh in the morning. But cold fermentation also develops more complex flavor, as bacteria keep producing organic acids at cold temperatures relatively faster than yeast produces gas. Retarded doughs are also easier to score, and many bakers get better oven spring baking straight from the fridge.</p>
+  </div>
+
+  <footer>
+    <p>Estimates are based on common fermentation behavior and may vary depending on your specific starter and flour.</p>
+    <p><a href="/">Calculator</a> <a href="/cold-retard.html">Cold Retard</a> <a href="/levain-build.html">Levain Build</a> <a href="/about.html">About</a> <a href="/contact.html">Contact</a></p>
+    <p><a href="https://swrltools.com">Part of Swrl Tools</a></p>
+  </footer>
+</div>
+
+<script>
+function calculate() {
+  const roomHours = parseFloat(document.getElementById('roomHours').value);
+  const fridgeTemp = parseFloat(document.getElementById('fridgeTemp').value);
+  const fridgeHours = parseFloat(document.getElementById('fridgeHours').value);
+  const stage = document.getElementById('stage').value;
+
+  if (isNaN(roomHours) || isNaN(fridgeTemp) || isNaN(fridgeHours)) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  // Fermentation rate at fridge temp relative to 75F room temp (Q10-like, halving per 16F)
+  const roomTemp = 75;
+  const fridgeRate = Math.pow(0.5, (roomTemp - fridgeTemp) / 16);
+
+  // Cooldown: ~2.5 hours transitioning, fermenting at ~50% average rate during cooldown
+  const cooldownHours = Math.min(2.5, fridgeHours);
+  const steadyHours = Math.max(0, fridgeHours - cooldownHours);
+  const fridgeEquivalent = cooldownHours * 0.5 + steadyHours * fridgeRate;
+
+  // Room-temp time remaining before fridge
+  let remaining = roomHours - fridgeEquivalent;
+
+  const pctConsumed = Math.min(100, Math.round((fridgeEquivalent / roomHours) * 100));
+
+  let output, note;
+  if (remaining <= 0.25) {
+    output = 'Little to no room-temp time needed';
+    note = 'Your ' + fridgeHours + '-hour retard at ' + fridgeTemp + '°F provides roughly ' +
+      fridgeEquivalent.toFixed(1) + ' hours of room-temperature-equivalent fermentation — about ' + pctConsumed +
+      '% of your recipe\'s total, possibly all of it. ' +
+      (stage === 'proof' ? 'Shape and refrigerate soon after your bulk fermentation completes, and watch for overproofing signs (very slack, fragile dough) when you bake.' :
+       'Consider putting the dough in the fridge shortly after mixing and developing strength, and watch it closely — you may want a shorter retard.');
+  } else {
+    output = remaining.toFixed(1) + ' hours at room temp before the fridge';
+    note = 'Ferment at room temperature for about ' + remaining.toFixed(1) + ' hours (roughly ' + (100 - pctConsumed) +
+      '% of the process), then refrigerate. The ' + fridgeHours + '-hour retard at ' + fridgeTemp +
+      '°F completes the remaining ~' + pctConsumed + '%. ' +
+      (stage === 'proof' ? 'You can bake directly from the fridge — no need to warm the dough first.' :
+       'After the cold bulk, let the dough warm slightly before shaping if it feels too stiff to handle.');
+  }
+
+  document.getElementById('timeOutput').textContent = output;
+  document.getElementById('noteOutput').textContent = note;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>
