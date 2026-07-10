@@ -5,8 +5,9 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cold Retard Calculator - Fridge Fermentation Timing - Sourdough Fermentation Calculator</title>
-<meta name="description" content="Calculate how refrigerating your sourdough changes fermentation timing. Plan overnight cold retards for bulk fermentation or final proof.">
+<title>Cold Proofing Calculator - Fridge Fermentation Timing - Sourdough Fermentation Calculator</title>
+<meta name="description" content="Free cold proofing calculator for sourdough. See how fridge fermentation changes your timing and plan overnight cold proofs for bulk fermentation or final proof.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍞</text></svg>">
 <style>
   :root {
     --bg: #faf6f0; --card: #ffffff; --text: #3a2e22; --muted: #7a6a58;
@@ -15,7 +16,7 @@
   * { box-sizing: border-box; }
   body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
   nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 20px; }
-  nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; flex-wrap: wrap; }
+  nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; min-height: 52px; flex-wrap: wrap; padding: 6px 0; }
   nav .nav-brand { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 0.95rem; }
   nav .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; margin-left: 14px; }
   nav .nav-links a:hover { color: var(--accent); }
@@ -48,8 +49,11 @@
   <div class="nav-inner">
     <a class="nav-brand" href="/">Sourdough Fermentation Calculator</a>
     <div class="nav-links">
-      <a href="/cold-retard.html">Cold Retard</a>
+      <a href="/cold-retard.html">Cold Proof</a>
       <a href="/levain-build.html">Levain Build</a>
+      <a href="/temperature-guide.html">Temperature</a>
+      <a href="/bulk-vs-proof.html">Bulk vs Proof</a>
+      <a href="/overproofed-dough.html">Overproofing</a>
       <a href="/about.html">About</a>
       <a href="/contact.html">Contact</a>
     </div>
@@ -57,8 +61,8 @@
 </nav>
 
 <div class="wrap">
-  <h1>Cold Retard Calculator</h1>
-  <p class="subtitle">Planning to slow your fermentation in the fridge? See how much fermentation still happens during a cold retard, and how to split your timing between room temperature and refrigeration.</p>
+  <h1>Cold Proofing Calculator</h1>
+  <p class="subtitle">Planning to slow your fermentation in the fridge &mdash; also called a cold retard? See how much fermentation still happens during a cold retard, and how to split your timing between room temperature and refrigeration.</p>
 
   <div class="card">
     <label for="roomHours">Fermentation time your recipe expects at room temperature (hours)
@@ -98,7 +102,7 @@
 
   <footer>
     <p>Estimates are based on common fermentation behavior and may vary depending on your specific starter and flour.</p>
-    <p><a href="/">Calculator</a> <a href="/cold-retard.html">Cold Retard</a> <a href="/levain-build.html">Levain Build</a> <a href="/about.html">About</a> <a href="/contact.html">Contact</a></p>
+    <p><a href="/">Calculator</a> <a href="/cold-retard.html">Cold Proof</a> <a href="/levain-build.html">Levain Build</a> <a href="/temperature-guide.html">Temperature Guide</a> <a href="/bulk-vs-proof.html">Bulk vs Proof</a> <a href="/overproofed-dough.html">Overproofing</a> <a href="/about.html">About</a> <a href="/contact.html">Contact</a> <a href="/privacy-policy.html">Privacy</a></p>
     <p><a href="https://swrltools.com">Part of Swrl Tools</a></p>
   </footer>
 </div>
